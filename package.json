@@ -1,0 +1,27 @@
+{
+  "name": "metalsmith-postcss",
+  "version": "1.0.0",
+  "description": "metalsmith postcss plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/axa-ch/metalsmith-postcss"
+  },
+  "keywords": [
+    "metalsmith",
+    "postcss"
+  ],
+  "author": "Sven Tschui <sven.tschui@axa.ch>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/axa-ch/metalsmith-postcss/issues"
+  },
+  "homepage": "https://github.com/axa-ch/metalsmith-postcss",
+  "dependencies": {
+    "minimatch": "^2.0.1",
+    "postcss": "^3.0.5"
+  }
+}
