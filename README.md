@@ -1,15 +1,12 @@
-metalsmith-autoprefixer
+metalsmith-postcss
 ===============
 
-[![Build Status](https://travis-ci.org/esundahl/metalsmith-autoprefixer.svg?branch=master)](https://travis-ci.org/esundahl/metalsmith-autoprefixer)
-![Dependencies](https://david-dm.org/esundahl/metalsmith-autoprefixer.png)
-
-An [Autoprefixer](https://github.com/ai/autoprefixer) plugin for Metalsmith.
+A [PostCSS](https://github.com/postcss/postcss) plugin for Metalsmith.
 
 ## Installation
 
 ```sh
-npm install --save metalsmith-autoprefixer
+npm install --save metalsmith-postcss
 ```
 
 ## Getting Started
@@ -19,16 +16,7 @@ documentation.
 
 ## CLI Usage
 
-If you are using the command-line version of Metalsmith, you can install via npm, and then add the
-`metalsmith-autoprefixer` key to your `metalsmith.json` file:
-
-```json
-{
-  "plugins": {
-    "metalsmith-autoprefixer": {}
-  }
-}
-```
+TBD
 
 ## JavaScript API
 
@@ -36,11 +24,11 @@ If you are using the JS Api for Metalsmith, then you can require the module and 
 `.use()` directives:
 
 ```js
-var autoprefixer = require('metalsmith-autoprefixer');
+var postcss = require('metalsmith-postcss');
 
-metalsmith.use(autoprefixer());
+metalsmith.use(postcss(plugins));
 ```
 
-## Options
+## Plugins
 
-None yet
+Pass an array of postcss plugins to be applied.
