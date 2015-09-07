@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-postcss",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "metalsmith postcss plugin",
   "main": "index.js",
   "scripts": {
