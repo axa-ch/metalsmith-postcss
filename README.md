@@ -31,4 +31,13 @@ metalsmith.use(postcss(plugins));
 
 ## Plugins
 
-Pass an array of postcss plugins to be applied.
+Pass your PostCSS plugins to `metalsmith-postcss` as follows:
+
+```js
+var postcss = require('metalsmith-postcss');
+
+var pseudoelements = require('postcss-pseudoelements');
+var nested = require('postcss-nested');
+
+metalsmith.use(postcss([pseudoelements(), nested()]));
+```
