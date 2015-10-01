@@ -14,7 +14,7 @@
     "metalsmith",
     "postcss"
   ],
-  "author": "Sven Tschui <sven.tschui@axa.ch>",
+  "author": "AXA Versicherungen AG",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/axa-ch/metalsmith-postcss/issues"
