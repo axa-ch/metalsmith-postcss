@@ -1,7 +1,8 @@
 metalsmith-postcss
 ===============
 
-A [PostCSS](https://github.com/postcss/postcss) plugin for Metalsmith.
+> A Metalsmith plugin that sends your CSS
+> through any [PostCSS](https://github.com/postcss/postcss) plugins.
 
 ## Installation
 
