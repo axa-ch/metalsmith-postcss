@@ -48,5 +48,9 @@ describe('metalsmith-postcss', function () {
           done();
         });
     });
+
+    it('should rename sourcemap files');
+
+    it('should find and use previous sourcemaps');
   });
 });
