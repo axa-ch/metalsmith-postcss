@@ -1,7 +1,7 @@
 {
   "name": "metalsmith-postcss",
   "version": "3.0.0",
-  "description": "metalsmith postcss plugin",
+  "description": "A Metalsmith plugin that sends your CSS through any PostCSS plugins.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,9 +12,11 @@
   },
   "keywords": [
     "metalsmith",
-    "postcss"
+    "postcss",
+    "css",
+    "preprocessor"
   ],
-  "author": "Sven Tschui <sven.tschui@axa.ch>",
+  "author": "AXA Versicherungen AG",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/axa-ch/metalsmith-postcss/issues"
