@@ -34,7 +34,6 @@ metalsmith.use(postcss([
 ]));
 ```
 
-<<<<<<< HEAD
 ## Sourcemaps
 
 This plugin doesn't generate sourcemaps by default. However, you
