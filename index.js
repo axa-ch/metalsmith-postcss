@@ -1,5 +1,6 @@
 var postcss = require('postcss');
 var minimatch = require('minimatch');
+var Promise = require('promise');
 
 module.exports = main;
 
@@ -13,10 +14,17 @@ function main(plugins, options) {
   return function (files, metalsmith, done) {
     var styles = Object.keys(files).filter(minimatch.filter("*.css", { matchBase: true }));
 
+    if(styles.length == 0) {
+      done();
+      return;
+    }
+
+    var promises = [];
+
     styles.forEach(function (file) {
       var contents = files[file].contents.toString();
 
-      processor
+      var promise = processor
         .process(contents, {
           from: file,
           to: file,
@@ -33,8 +41,18 @@ function main(plugins, options) {
              };
            }
         });
+
+        promises.push(promise);
     });
-    done();
+
+    Promise.all(promises)
+      .then(function(results) {
+        done();
+      })
+      .catch(function(error) {
+        done(new Error("Error during postcss processing: " + JSON.stringify(error)));
+      });
+
   }
 }
 

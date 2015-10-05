@@ -22,7 +22,8 @@
   "homepage": "https://github.com/axa-ch/metalsmith-postcss",
   "dependencies": {
     "minimatch": "^2.0.1",
-    "postcss": "^5.0.4"
+    "postcss": "^5.0.4",
+    "promise": "^7.0.4"
   },
   "devDependencies": {
     "assert-dir-equal": "^1.0.1",
