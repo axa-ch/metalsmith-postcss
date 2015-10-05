@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-postcss",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A Metalsmith plugin that sends your CSS through any PostCSS plugins.",
   "main": "index.js",
   "scripts": {
