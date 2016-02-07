@@ -4,10 +4,25 @@ var Promise = require('promise');
 
 module.exports = main;
 
-function main(plugins, options) {
-  var plugins = plugins || [];
+function main(options) {
+
   var options = options || {};
+  var pluginsConfig = options.plugins;
+  if (!Object.keys(pluginsConfig).length) {
+    return;
+  }
+
   var map = normalizeMapOptions(options.map);
+
+  var plugins = [];
+  // Require each plugin,
+  // pass it it’s options and
+  // add it to the plugin array
+  Object.keys(pluginsConfig).forEach(function(pluginName) {
+    var plugin = require(pluginName);
+    var pluginOptions = pluginsConfig[pluginName] === true || Object.keys(pluginsConfig[pluginName]).length ? null : pluginsConfig[pluginName];
+    plugins.push(plugin(pluginOptions));
+  });
 
   var processor = postcss(plugins);
 

@@ -17,21 +17,37 @@ head over to their website and check out the documentation.
 ## JavaScript API
 
 Using the JavaScript api for Metalsmith,
-just require the module and add it to your
-`.use()` directives. Here is an example using
-`postcss-pseudoelements` and `postcss-nested` to
+just add the postcss package name, optionally with it’s
+options, to your `.use()` directives. Here is an example
+using `postcss-pseudoelements` and `postcss-nested` to
 transform your source files.
 
 ```js
 var postcss = require('metalsmith-postcss');
 
-var pseudoelements = require('postcss-pseudoelements');
-var nested = require('postcss-nested');
+metalsmith.use(postcss({
+  'postcss-pseudoelements': {}
+  'postcss-nested': {}
+}));
+```
 
-metalsmith.use(postcss([
-  pseudoelements(),
-  nested()
-]));
+## Metalsmith CLI
+
+Using the Metalsmith CLI, just add the postcss package name,
+optionally with it’s options, to your `metalsmith.json` config.
+Here is an example using `postcss-pseudoelements` and `postcss-nested`
+to transform your source files.
+
+```js
+var postcss = require('metalsmith-postcss');
+
+"metalsmith-postcss": {
+  "plugins": {
+    "postcss-pseudoelements": true,
+    "postcss-nested": true
+  },
+  "map": true
+}
 ```
 
 ## Sourcemaps
@@ -45,7 +61,10 @@ Add `map: true` to the `options` argument to get your
 sourcemaps written into the source file.
 
 ```js
-metalsmith.use(postcss([...], {
+metalsmith.use(postcss({
+  plugins: [
+    ...
+  ],
   map: true
 }));
 ```
@@ -53,7 +72,10 @@ metalsmith.use(postcss([...], {
 Behind the scenes, this resolves to the following:
 
 ```js
-metalsmith.use(postcss([...], {
+metalsmith.use(postcss({
+  plugins: {
+    ...
+  },
   map: {
     inline: true
   }
@@ -67,7 +89,10 @@ just set `inline: false`. Using that, you'll get `.map` files
 generated beside your sources.
 
 ```js
-metalsmith.use(postcss([...], {
+metalsmith.use(postcss({
+  plugins: {
+    ...
+  },
   map: {
     inline: false
   }
@@ -81,8 +106,3 @@ To run the tests use:
 ```sh
 npm test
 ```
-
-## CLI Usage
-
-It's currently *NOT* possible to use this plugin from your
-`metalsmith.json` file.
