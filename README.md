@@ -26,8 +26,10 @@ transform your source files.
 var postcss = require('metalsmith-postcss');
 
 metalsmith.use(postcss({
-  'postcss-pseudoelements': {}
-  'postcss-nested': {}
+  plugins: {
+    'postcss-pseudoelements': {}
+    'postcss-nested': {}
+  }
 }));
 ```
 
@@ -43,8 +45,8 @@ var postcss = require('metalsmith-postcss');
 
 "metalsmith-postcss": {
   "plugins": {
-    "postcss-pseudoelements": true,
-    "postcss-nested": true
+    "postcss-pseudoelements": {},
+    "postcss-nested": {}
   },
   "map": true
 }

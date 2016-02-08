@@ -12,17 +12,19 @@ function main(options) {
     return;
   }
 
-  var map = normalizeMapOptions(options.map);
-
   var plugins = [];
-  // Require each plugin,
-  // pass it it’s options and
-  // add it to the plugin array
+
+  // Require each plugin, pass it it’s options
+  // and add it to the plugins array.
   Object.keys(pluginsConfig).forEach(function(pluginName) {
+    var value = pluginsConfig[pluginName];
+    if (value === false) return;
+    var pluginOptions = value === true ? {} : value;
     var plugin = require(pluginName);
-    var pluginOptions = pluginsConfig[pluginName] === true || Object.keys(pluginsConfig[pluginName]).length ? null : pluginsConfig[pluginName];
     plugins.push(plugin(pluginOptions));
   });
+
+  var map = normalizeMapOptions(options.map);
 
   var processor = postcss(plugins);
 
