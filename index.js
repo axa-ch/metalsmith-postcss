@@ -1,6 +1,7 @@
 var postcss = require('postcss');
 var minimatch = require('minimatch');
 var Promise = require('promise');
+var path = require('path');
 
 module.exports = main;
 
@@ -23,11 +24,12 @@ function main(plugins, options) {
 
     styles.forEach(function (file) {
       var contents = files[file].contents.toString();
-
+      var absolutePath = path.resolve(metalsmith.source(), file);
+       
       var promise = processor
         .process(contents, {
-          from: file,
-          to: file,
+          from: absolutePath,
+          to: absolutePath,
           map: map
         })
         .then(function (result) {
