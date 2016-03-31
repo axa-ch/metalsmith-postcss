@@ -3,6 +3,7 @@ var fixture = path.resolve.bind(path, __dirname, 'fixtures');
 var assert = require('assert');
 var equal = require('assert-dir-equal');
 var Metalsmith = require('metalsmith');
+var atImport = require('postcss-import');
 var postcss = require('..');
 
 describe('metalsmith-postcss', function () {
@@ -52,5 +53,16 @@ describe('metalsmith-postcss', function () {
     it('should rename sourcemap files');
 
     it('should find and use previous sourcemaps');
+
+    it('should pass absolute paths to postcss', function (done) {
+      var metalsmith = Metalsmith(fixture('use-absolute-paths'));
+      metalsmith
+        .use(postcss([atImport()]))
+        .build(function (err) {
+          if (err) return done(err);
+          equal(fixture('use-absolute-paths/build'), fixture('use-absolute-paths/expected'));
+          done();
+        });
+    });
   });
 });
