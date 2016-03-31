@@ -25,7 +25,7 @@ function main(plugins, options) {
     styles.forEach(function (file) {
       var contents = files[file].contents.toString();
       var absolutePath = path.resolve(metalsmith.source(), file);
-       
+
       var promise = processor
         .process(contents, {
           from: absolutePath,
