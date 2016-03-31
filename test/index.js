@@ -3,7 +3,6 @@ var fixture = path.resolve.bind(path, __dirname, 'fixtures');
 var assert = require('assert');
 var equal = require('assert-dir-equal');
 var Metalsmith = require('metalsmith');
-var atImport = require('postcss-import');
 var postcss = require('..');
 
 describe('metalsmith-postcss', function () {
@@ -13,7 +12,8 @@ describe('metalsmith-postcss', function () {
     it('should not add sourcemaps at all', function (done) {
       var metalsmith = Metalsmith(fixture('no-sourcemaps'));
       metalsmith
-        .use(postcss([], {
+        .use(postcss({
+          plugins: {}
         }))
         .build(function (err) {
           if (err) return done(err);
@@ -25,7 +25,8 @@ describe('metalsmith-postcss', function () {
     it('should add inline sourcemaps', function (done) {
       var metalsmith = Metalsmith(fixture('inline-sourcemaps'));
       metalsmith
-        .use(postcss([], {
+        .use(postcss({
+          plugins: {},
           map: true
         }))
         .build(function (err) {
@@ -38,7 +39,8 @@ describe('metalsmith-postcss', function () {
     it('should add external sourcemap files', function (done) {
       var metalsmith = Metalsmith(fixture('external-sourcemaps'));
       metalsmith
-        .use(postcss([], {
+        .use(postcss({
+          plugins: {},
           map: {
             inline: false
           }
@@ -57,7 +59,11 @@ describe('metalsmith-postcss', function () {
     it('should pass absolute paths to postcss', function (done) {
       var metalsmith = Metalsmith(fixture('use-absolute-paths'));
       metalsmith
-        .use(postcss([atImport()]))
+        .use(postcss({
+          plugins: {
+            'postcss-import': {}
+          }
+        }))
         .build(function (err) {
           if (err) return done(err);
           equal(fixture('use-absolute-paths/build'), fixture('use-absolute-paths/expected'));

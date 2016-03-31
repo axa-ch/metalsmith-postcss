@@ -5,9 +5,22 @@ var path = require('path');
 
 module.exports = main;
 
-function main(plugins, options) {
-  var plugins = plugins || [];
+function main(options) {
+
   var options = options || {};
+  var pluginsConfig = options.plugins;
+  var plugins = [];
+
+  // Require each plugin, pass it it’s options
+  // and add it to the plugins array.
+  Object.keys(pluginsConfig).forEach(function(pluginName) {
+    var value = pluginsConfig[pluginName];
+    if (value === false) return;
+    var pluginOptions = value === true ? {} : value;
+    var plugin = require(pluginName);
+    plugins.push(plugin(pluginOptions));
+  });
+
   var map = normalizeMapOptions(options.map);
 
   var processor = postcss(plugins);
