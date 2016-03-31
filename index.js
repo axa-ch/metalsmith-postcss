@@ -9,10 +9,6 @@ function main(options) {
 
   var options = options || {};
   var pluginsConfig = options.plugins;
-  if (!Object.keys(pluginsConfig).length) {
-    return;
-  }
-
   var plugins = [];
 
   // Require each plugin, pass it it’s options
