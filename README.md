@@ -64,9 +64,7 @@ sourcemaps written into the source file.
 
 ```js
 metalsmith.use(postcss({
-  plugins: [
-    ...
-  ],
+  plugins: {},
   map: true
 }));
 ```
@@ -75,9 +73,7 @@ Behind the scenes, this resolves to the following:
 
 ```js
 metalsmith.use(postcss({
-  plugins: {
-    ...
-  },
+  plugins: {},
   map: {
     inline: true
   }
@@ -92,9 +88,7 @@ generated beside your sources.
 
 ```js
 metalsmith.use(postcss({
-  plugins: {
-    ...
-  },
+  plugins: {},
   map: {
     inline: false
   }
