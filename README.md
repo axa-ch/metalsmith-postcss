@@ -41,8 +41,6 @@ Here is an example using `postcss-pseudoelements` and `postcss-nested`
 to transform your source files.
 
 ```js
-var postcss = require('metalsmith-postcss');
-
 "metalsmith-postcss": {
   "plugins": {
     "postcss-pseudoelements": {},
