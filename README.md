@@ -1,5 +1,7 @@
 # metalsmith-postcss
 
+[![Build Status](https://travis-ci.org/axa-ch/metalsmith-postcss.svg?branch=master)](https://travis-ci.org/axa-ch/metalsmith-postcss)
+
 > A Metalsmith plugin that sends your CSS
 > through any [PostCSS](https://github.com/postcss/postcss) plugins.
 
