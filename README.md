@@ -56,15 +56,18 @@ to transform your source files.
 
 Sometime in PostCSS, plugins need to be defined in a certain order and JavaScript
 Objects cannot guarantee the order of keys in an object. Therefore, you are able
-to specify PostCSS plugins using arrays (which can guarantee the order of loading).
+to specify PostCSS plugins using an array of objects(which can guarantee the order
+  of loading).
 
 ```js
 "metalsmith-postcss": {
   "plugins": [
     "postcss-pseudoelements",
-    ["postcss-nested", {
-      "some": "config"
-    }]
+    {
+      "postcss-nested": {
+        "some": "config"
+      }
+    }
   ]
 }
 ```

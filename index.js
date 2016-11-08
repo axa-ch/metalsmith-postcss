@@ -8,34 +8,23 @@ module.exports = main;
 function main(options) {
 
   var options = options || {};
-  var pluginsConfig = options.plugins;
+  var pluginsConfig = Array.isArray(options.plugins) ? options.plugins : [options.plugins];
   var plugins = [];
 
   // Require each plugin, pass it it’s options
   // and add it to the plugins array.
-  if (Array.isArray(pluginsConfig)) {
-    pluginsConfig.forEach(function (plugin) {
-      var pkg;
-      var config = {};
-      if (typeof plugin === 'string') {
-        pkg = plugin;
-      } else {
-        pkg = plugin[0];
-        config = plugin[1];
-      }
-      if (config === false) {
-        return;
-      }
-      plugins.push(require(pkg)(config));
-    });
-  } else {
-    Object.keys(pluginsConfig).forEach(function (pluginName) {
-      var value = pluginsConfig[pluginName];
-      if (value === false) return;
-      var pluginOptions = value === true ? {} : value;
-      plugins.push(require(pluginName)(pluginOptions));
-    });
-  }
+  pluginsConfig.forEach(function (pluginsObject) {
+    if (typeof pluginsObject === 'string') {
+      plugins.push(require(pluginsObject)({}));
+    } else {
+      Object.keys(pluginsObject).forEach(function (pluginName) {
+        var value = pluginsConfig[pluginName];
+        if (value === false) return;
+        var pluginOptions = value === true ? {} : value;
+        plugins.push(require(pluginName)(pluginOptions));
+      });
+    }
+  });
 
   var map = normalizeMapOptions(options.map);
 

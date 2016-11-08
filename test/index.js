@@ -75,9 +75,9 @@ describe('metalsmith-postcss', function () {
       var metalsmith = Metalsmith(fixture('use-absolute-paths'));
       metalsmith
         .use(postcss({
-          plugins: [
-            ['postcss-import', {}]
-          ]
+          plugins: [{
+            'postcss-import': {},
+          }],
         }))
         .build(function (err) {
           if (err) return done(err);
