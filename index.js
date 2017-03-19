@@ -65,6 +65,10 @@ function main(options) {
         done();
       })
       .catch(function(error) {
+        // JSON.stringify on an actual error object yields 0 key/values
+        if (error instanceof Error) {
+          return done(error);
+        }
         done(new Error("Error during postcss processing: " + JSON.stringify(error)));
       });
 
