@@ -52,6 +52,23 @@ to transform your source files.
 }
 ```
 
+## Alternative plugin definition syntax
+
+Sometime in PostCSS, plugins need to be defined in a certain order and JavaScript
+Objects cannot guarantee the order of keys in an object. Therefore, you are able
+to specify PostCSS plugins using arrays (which can guarantee the order of loading).
+
+```js
+"metalsmith-postcss": {
+  "plugins": [
+    "postcss-pseudoelements",
+    ["postcss-nested", {
+      "some": "config"
+    }]
+  ]
+}
+```
+
 ## Sourcemaps
 
 This plugin doesn't generate sourcemaps by default. However, you
