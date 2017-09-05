@@ -70,5 +70,20 @@ describe('metalsmith-postcss', function () {
           done();
         });
     });
+
+    it('should be able to use arrays as a way to define plugins', function (done) {
+      var metalsmith = Metalsmith(fixture('use-absolute-paths'));
+      metalsmith
+        .use(postcss({
+          plugins: [{
+            'postcss-import': {},
+          }],
+        }))
+        .build(function (err) {
+          if (err) return done(err);
+          equal(fixture('use-absolute-paths/build'), fixture('use-absolute-paths/expected'));
+          done();
+        });
+    });
   });
 });
