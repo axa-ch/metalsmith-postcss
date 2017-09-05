@@ -1,6 +1,5 @@
 var postcss = require('postcss');
 var minimatch = require('minimatch');
-var Promise = require('promise');
 var path = require('path');
 
 module.exports = main;

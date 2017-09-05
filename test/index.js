@@ -52,10 +52,6 @@ describe('metalsmith-postcss', function () {
         });
     });
 
-    it('should rename sourcemap files');
-
-    it('should find and use previous sourcemaps');
-
     it('should pass absolute paths to postcss', function (done) {
       var metalsmith = Metalsmith(fixture('use-absolute-paths'));
       metalsmith
