@@ -4,5 +4,6 @@ node_js:
   - "6"
 
 script:
+  - npm outdated || true
   - npm run lint
   - npm test
