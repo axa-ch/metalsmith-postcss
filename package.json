@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha test --harmony",
     "lint:js": "eslint . *.js --max-warnings 0",
-    "lint:security": "nsp check"
+    "lint:security": "nsp check",
+    "lint": "npm run lint:js && npm run lint:security"
   },
   "repository": {
     "type": "git",
