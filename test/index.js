@@ -1,6 +1,5 @@
 var path = require('path');
 var fixture = path.resolve.bind(path, __dirname, 'fixtures');
-var assert = require('assert');
 var equal = require('assert-dir-equal');
 var Metalsmith = require('metalsmith');
 var postcss = require('..');
