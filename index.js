@@ -6,7 +6,7 @@ module.exports = main;
 
 function main(options) {
 
-  var options = options || {};
+  options = options || {};
   var pluginsConfig = Array.isArray(options.plugins) ? options.plugins : [options.plugins];
   var plugins = [];
 
@@ -30,7 +30,7 @@ function main(options) {
   var processor = postcss(plugins);
 
   return function (files, metalsmith, done) {
-    var styles = Object.keys(files).filter(minimatch.filter("*.css", { matchBase: true }));
+    var styles = Object.keys(files).filter(minimatch.filter('*.css', { matchBase: true }));
 
     if(styles.length == 0) {
       done();
@@ -52,20 +52,20 @@ function main(options) {
         .then(function (result) {
           files[file].contents = new Buffer(result.css);
 
-           if (result.map) {
-             files[file + '.map'] = {
-               contents: new Buffer(JSON.stringify(result.map)),
-               mode: files[file].mode,
-               stats: files[file].stats
-             };
-           }
+          if (result.map) {
+            files[file + '.map'] = {
+              contents: new Buffer(JSON.stringify(result.map)),
+              mode: files[file].mode,
+              stats: files[file].stats
+            };
+          }
         });
 
-        promises.push(promise);
+      promises.push(promise);
     });
 
     Promise.all(promises)
-      .then(function(results) {
+      .then(function() {
         done();
       })
       .catch(function(error) {
@@ -73,10 +73,10 @@ function main(options) {
         if (error instanceof Error) {
           return done(error);
         }
-        done(new Error("Error during postcss processing: " + JSON.stringify(error)));
+        done(new Error('Error during postcss processing: ' + JSON.stringify(error)));
       });
 
-  }
+  };
 }
 
 function normalizeMapOptions(map) {

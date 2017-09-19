@@ -1,0 +1,15 @@
+env:
+  mocha: true
+extends: 'eslint:recommended'
+rules:
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - off # enforcing of linebreaks is done through .gitattributes
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - always
