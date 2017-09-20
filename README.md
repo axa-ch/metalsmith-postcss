@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/axa-ch/metalsmith-postcss.svg?branch=master)](https://travis-ci.org/axa-ch/metalsmith-postcss)
 [![Greenkeeper badge](https://badges.greenkeeper.io/axa-ch/metalsmith-postcss.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/axa-ch/metalsmith-postcss/badge.svg)](https://snyk.io/test/github/axa-ch/metalsmith-postcss)
+[![NSP Status](https://nodesecurity.io/orgs/axa-ch/projects/394d1209-83a5-48f4-ae04-19dde4db3763/badge)](https://nodesecurity.io/orgs/axa-ch/projects/394d1209-83a5-48f4-ae04-19dde4db3763)
 
 > A Metalsmith plugin that sends your CSS
 > through any [PostCSS](https://github.com/postcss/postcss) plugins.
