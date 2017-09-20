@@ -35,8 +35,8 @@
     "assert-dir-equal": "^1.0.1",
     "eslint": "^4.6.1",
     "metalsmith": "^2.1.0",
-    "mocha": "^2.3.3",
+    "mocha": "^3.5.3",
     "nsp": "^2.8.0",
-    "postcss-import": "^8.0.2 || ^10.0.0"
+    "postcss-import": "^11.0.0"
   }
 }
