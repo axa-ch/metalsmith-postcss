@@ -1,5 +1,7 @@
 # metalsmith-postcss
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/axa-ch/metalsmith-postcss.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/axa-ch/metalsmith-postcss.svg?branch=master)](https://travis-ci.org/axa-ch/metalsmith-postcss)
 
 > A Metalsmith plugin that sends your CSS
