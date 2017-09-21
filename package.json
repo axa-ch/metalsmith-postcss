@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "assert-dir-equal": "^1.0.1",
-    "eslint": "^4.6.1",
+    "eslint": "^4.7.2",
     "metalsmith": "^2.1.0",
     "mocha": "^3.5.3",
     "nsp": "^2.8.0",
