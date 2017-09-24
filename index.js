@@ -17,7 +17,7 @@ function main(options) {
       plugins.push(require(pluginsObject)({}));
     } else {
       Object.keys(pluginsObject).forEach(function (pluginName) {
-        var value = pluginsConfig[pluginName];
+        var value = pluginsObject[pluginName];
         if (value === false) return;
         var pluginOptions = value === true ? {} : value;
         plugins.push(require(pluginName)(pluginOptions));
