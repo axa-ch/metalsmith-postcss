@@ -6,7 +6,6 @@ cache:
     - $NVM_DIR
 
 node_js:
-  - "4.4.2"
   - "6"
   - "8"
 
