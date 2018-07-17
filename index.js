@@ -30,7 +30,7 @@ function main(options) {
   var processor = postcss(plugins);
 
   return function (files, metalsmith, done) {
-    var styles = Object.keys(files).filter(minimatch.filter('*.css', { matchBase: true }));
+    var styles = Object.keys(files).filter(minimatch.filter(options.pattern || '*.css', { matchBase: true }));
 
     if(styles.length == 0) {
       done();
