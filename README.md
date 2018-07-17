@@ -38,6 +38,16 @@ metalsmith.use(postcss({
 }));
 ```
 
+By default, files with `.css` extension will be parsed. This may be overridden
+by providing a custom pattern e.g.
+
+```js
+metalsmith.use(postcss({
+  pattern: '*.postcss',
+  plugins: { ... }
+}));
+```
+
 ## Metalsmith CLI
 
 Using the Metalsmith CLI, just add the postcss package name,
