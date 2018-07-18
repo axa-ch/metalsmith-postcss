@@ -42,6 +42,7 @@ function main(options) {
     styles.forEach(function (file) {
       var contents = files[file].contents.toString();
       var absolutePath = path.resolve(metalsmith.source(), file);
+      var outputFile = file.replace(/\.\w+$/, '.css');
 
       var promise = processor
         .process(contents, {
@@ -50,13 +51,15 @@ function main(options) {
           map: map
         })
         .then(function (result) {
-          files[file].contents = new Buffer(result.css);
+          files[outputFile] = files[file];
+          files[outputFile].contents = new Buffer(result.css);
+          if (file !== outputFile) delete files[file];
 
           if (result.map) {
-            files[file + '.map'] = {
+            files[outputFile + '.map'] = {
               contents: new Buffer(JSON.stringify(result.map)),
-              mode: files[file].mode,
-              stats: files[file].stats
+              mode: files[outputFile].mode,
+              stats: files[outputFile].stats
             };
           }
         });
