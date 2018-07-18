@@ -53,7 +53,7 @@ function main(options) {
         .then(function (result) {
           files[outputFile] = files[file];
           files[outputFile].contents = new Buffer(result.css);
-          delete files[file];
+          if (file !== outputFile) delete files[file];
 
           if (result.map) {
             files[outputFile + '.map'] = {
