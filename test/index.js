@@ -1,15 +1,15 @@
-var path = require('path');
-var fixture = path.resolve.bind(path, __dirname, 'fixtures');
-var equal = require('assert-dir-equal');
-var Metalsmith = require('metalsmith');
-var postcss = require('..');
+const path = require('path');
+const fixture = path.resolve.bind(path, __dirname, 'fixtures');
+const equal = require('assert-dir-equal');
+const Metalsmith = require('metalsmith');
+const postcss = require('..');
 
 describe('metalsmith-postcss', function () {
 
   describe('sourcemaps', function () {
 
     it('should not add sourcemaps at all', function (done) {
-      var metalsmith = Metalsmith(fixture('no-sourcemaps'));
+      const metalsmith = Metalsmith(fixture('no-sourcemaps'));
       metalsmith
         .use(postcss({
           plugins: {}
@@ -22,7 +22,7 @@ describe('metalsmith-postcss', function () {
     });
 
     it('should add inline sourcemaps', function (done) {
-      var metalsmith = Metalsmith(fixture('inline-sourcemaps'));
+      const metalsmith = Metalsmith(fixture('inline-sourcemaps'));
       metalsmith
         .use(postcss({
           plugins: {},
@@ -36,7 +36,7 @@ describe('metalsmith-postcss', function () {
     });
 
     it('should add external sourcemap files', function (done) {
-      var metalsmith = Metalsmith(fixture('external-sourcemaps'));
+      const metalsmith = Metalsmith(fixture('external-sourcemaps'));
       metalsmith
         .use(postcss({
           plugins: {},
@@ -52,7 +52,7 @@ describe('metalsmith-postcss', function () {
     });
 
     it('should pass absolute paths to postcss', function (done) {
-      var metalsmith = Metalsmith(fixture('use-absolute-paths'));
+      const metalsmith = Metalsmith(fixture('use-absolute-paths'));
       metalsmith
         .use(postcss({
           plugins: {
@@ -70,7 +70,7 @@ describe('metalsmith-postcss', function () {
     });
 
     it('should be able to use arrays as a way to define plugins', function (done) {
-      var metalsmith = Metalsmith(fixture('use-absolute-paths'));
+      const metalsmith = Metalsmith(fixture('use-absolute-paths'));
       metalsmith
         .use(postcss({
           plugins: [{

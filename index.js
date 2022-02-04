@@ -1,60 +1,69 @@
-var postcss = require('postcss');
-var minimatch = require('minimatch');
-var path = require('path');
+const postcssLib = require('postcss');
+const minimatch = require('minimatch');
+const path = require('path');
 
-module.exports = main;
+function normalizeMapOptions(map) {
+  if (!map) return undefined;
 
-function main(options) {
+  return {
+    inline: map === true ? true : map.inline,
+    prev: false, // Not implemented yet
+    sourcesContent: undefined,  // Not implemented yet
+    annotation: undefined // Not implemented yet
+  };
+}
+
+function initPostcss(options) {
 
   options = options || {};
-  var pluginsConfig = Array.isArray(options.plugins) ? options.plugins : [options.plugins];
-  var plugins = [];
+  const pluginsConfig = Array.isArray(options.plugins) ? options.plugins : [options.plugins];
+  const plugins = [];
 
-  // Require each plugin, pass it it’s options
+  // Require each plugin, pass its options
   // and add it to the plugins array.
   pluginsConfig.forEach(function (pluginsObject) {
     if (typeof pluginsObject === 'string') {
       plugins.push(require(pluginsObject)({}));
     } else {
       Object.keys(pluginsObject).forEach(function (pluginName) {
-        var value = pluginsObject[pluginName];
+        const value = pluginsObject[pluginName];
         if (value === false) return;
-        var pluginOptions = value === true ? {} : value;
+        const pluginOptions = value === true ? {} : value;
         plugins.push(require(pluginName)(pluginOptions));
       });
     }
   });
 
-  var map = normalizeMapOptions(options.map);
+  const map = normalizeMapOptions(options.map);
 
-  var processor = postcss(plugins);
+  const processor = postcssLib(plugins);
 
-  return function (files, metalsmith, done) {
-    var styles = Object.keys(files).filter(minimatch.filter(options.pattern || '*.css', { matchBase: true }));
+  return function postcss(files, metalsmith, done) {
+    const styles = Object.keys(files).filter(minimatch.filter(options.pattern || '*.css', { matchBase: true }));
 
     if(styles.length == 0) {
       done();
       return;
     }
 
-    var promises = [];
+    const promises = [];
 
     styles.forEach(function (file) {
-      var contents = files[file].contents.toString();
-      var absolutePath = path.resolve(metalsmith.source(), file);
+      const contents = files[file].contents.toString();
+      const absolutePath = path.resolve(metalsmith.source(), file);
 
-      var promise = processor
+      const promise = processor
         .process(contents, {
           from: absolutePath,
           to: absolutePath,
           map: map
         })
         .then(function (result) {
-          files[file].contents = new Buffer(result.css);
+          files[file].contents = Buffer.from(result.css);
 
           if (result.map) {
             files[file + '.map'] = {
-              contents: new Buffer(JSON.stringify(result.map)),
+              contents: Buffer.from(JSON.stringify(result.map)),
               mode: files[file].mode,
               stats: files[file].stats
             };
@@ -79,13 +88,4 @@ function main(options) {
   };
 }
 
-function normalizeMapOptions(map) {
-  if (!map) return undefined;
-
-  return {
-    inline: map === true ? true : map.inline,
-    prev: false, // Not implemented yet
-    sourcesContent: undefined,  // Not implemented yet
-    annotation: undefined // Not implemented yet
-  };
-}
+module.exports = initP;
