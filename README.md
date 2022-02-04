@@ -1,34 +1,32 @@
 # metalsmith-postcss
 
-[![Build Status](https://travis-ci.org/axa-ch/metalsmith-postcss.svg?branch=master)](https://travis-ci.org/axa-ch/metalsmith-postcss)
-[![Greenkeeper badge](https://badges.greenkeeper.io/axa-ch/metalsmith-postcss.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/axa-ch/metalsmith-postcss/badge.svg)](https://snyk.io/test/github/axa-ch/metalsmith-postcss)
-[![NSP Status](https://nodesecurity.io/orgs/axa-ch/projects/394d1209-83a5-48f4-ae04-19dde4db3763/badge)](https://nodesecurity.io/orgs/axa-ch/projects/394d1209-83a5-48f4-ae04-19dde4db3763)
+A [Metalsmith](http://metalsmith.io/) plugin that sends your CSS through any [PostCSS](https://github.com/postcss/postcss) plugins.
 
-> A Metalsmith plugin that sends your CSS
-> through any [PostCSS](https://github.com/postcss/postcss) plugins.
+[![metalsmith: plugin][metalsmith-badge]][metalsmith-url]
+[![npm: version][npm-badge]][npm-url]
+[![ci: build][ci-badge]][ci-url]
+[![Known Vulnerabilities](https://snyk.io/test/github/axa-ch/metalsmith-postcss/badge.svg)](https://snyk.io/test/github/axa-ch/metalsmith-postcss)
+[![license: MIT][license-badge]][license-url]
 
 ## Installation
 
+NPM:
 ```sh
 npm install metalsmith-postcss
 ```
 
-## Getting Started
+Yarn:
+```sh
+yarn add metalsmith-postcss
+```
 
-If you haven't checked out [Metalsmith](http://metalsmith.io/) before,
-head over to their website and check out the documentation.
+## Usage
 
-## JavaScript API
-
-Using the JavaScript api for Metalsmith,
-just add the postcss package name, optionally with it’s
-options, to your `.use()` directives. Here is an example
-using `postcss-pseudoelements` and `postcss-nested` to
-transform your source files.
+Add the postcss package name, optionally with its options, to your `.use()` directives.
+Here is an example using `postcss-pseudoelements` and `postcss-nested` to transform your source files:
 
 ```js
-var postcss = require('metalsmith-postcss');
+const postcss = require('metalsmith-postcss');
 
 metalsmith.use(postcss({
   plugins: {
@@ -38,6 +36,12 @@ metalsmith.use(postcss({
 }));
 ```
 
+### Options
+
+* **pattern** `{string|string[]}` *(optional)* - Pattern of CSS files to match relative to `Metalsmith.source()`. Defaults to `**/*.css`
+* **plugins** `{Object|Array<Object|string>}` *(optional)* - An object with PostCSS plugin names as keys and their options as values, or an array of PostCSS plugins as names, eg `'postcss-plugin'`or objects in the format `{ 'postcss-plugin': {...options}}`
+* **map** {boolean|{inline:boolean}}` *(optional)* - Pass `true` for inline sourcemaps, or `{ inline: false }` for external source maps
+ 
 By default, files with `.css` extension will be parsed. This may be overridden
 by providing a custom pattern e.g.
 
@@ -46,23 +50,6 @@ metalsmith.use(postcss({
   pattern: '*.postcss',
   plugins: { ... }
 }));
-```
-
-## Metalsmith CLI
-
-Using the Metalsmith CLI, just add the postcss package name,
-optionally with it’s options, to your `metalsmith.json` config.
-Here is an example using `postcss-pseudoelements` and `postcss-nested`
-to transform your source files.
-
-```js
-"metalsmith-postcss": {
-  "plugins": {
-    "postcss-pseudoelements": {},
-    "postcss-nested": {}
-  },
-  "map": true
-}
 ```
 
 ## Alternative plugin definition syntax
@@ -92,8 +79,7 @@ can enable them using several ways.
 
 ### Inline sourcemaps
 
-Add `map: true` to the `options` argument to get your
-sourcemaps written into the source file.
+Add `map: true` to the `options` argument to get your sourcemaps written into the source file.
 
 ```js
 metalsmith.use(postcss({
@@ -128,6 +114,21 @@ metalsmith.use(postcss({
 }));
 ```
 
+## CLI usage
+
+Using the Metalsmith CLI, just add the postcss package name, optionally with its options, to your `metalsmith.json` config.
+Here is an example using `postcss-pseudoelements` and `postcss-nested` to transform your source files.
+
+```js
+"metalsmith-postcss": {
+  "plugins": {
+    "postcss-pseudoelements": {},
+    "postcss-nested": {}
+  },
+  "map": true
+}
+```
+
 ## Test
 
 To run the tests use:
@@ -135,3 +136,18 @@ To run the tests use:
 ```sh
 npm test
 ```
+
+To view end-to-end tests in browser, use:
+
+```sh
+npm run test:e2e
+```
+
+[npm-badge]: https://img.shields.io/npm/v/metalsmith-postcss.svg
+[npm-url]: https://www.npmjs.com/package/metalsmith-postcss
+[ci-url]: https://github.com/axa-ch/metalsmith-postcss/actions/workflows/test.yml
+[ci-badge]: https://github.com/axa-ch/metalsmith-postcss/actions/workflows/test.yml/badge.svg
+[metalsmith-badge]: https://img.shields.io/badge/metalsmith-core_plugin-green.svg?longCache=true
+[metalsmith-url]: https://metalsmith.io
+[license-badge]: https://img.shields.io/github/license/axa-ch/metalsmith-postcss
+[license-url]: LICENSE

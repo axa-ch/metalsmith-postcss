@@ -13,6 +13,21 @@ function normalizeMapOptions(map) {
   };
 }
 
+/**
+ * @typedef {Object} SourceMapOptions 
+ * @property {boolean} inline
+ */
+
+/**
+ * A metalsmith plugin that sends your CSS through any [PostCSS](https://github.com/postcss/postcss) plugins
+ * @param {Object} options
+ * @param {string|string[]} [options.pattern] Pattern(s) of CSS files to match relative to `Metalsmith.source()`. Default is `**\/*.css`
+ * @param {boolean|SourceMapOptions} [options.map] Pass `true` for inline sourcemaps, or `{ inline: false }` for external source maps
+ * @param {string|{'postcss-plugin': Object}|Array<{'postcss-plugin': Object}|string>} options.plugins
+ * An object with PostCSS plugin names as keys and their options as values, or an array of PostCSS plugins as names, eg `'postcss-plugin'`
+ * or objects in the format `{ 'postcss-plugin': {...options}}`
+ * @returns {import('metalsmith').Plugin}
+ */
 function initPostcss(options) {
 
   options = options || {};
@@ -39,7 +54,7 @@ function initPostcss(options) {
   const processor = postcssLib(plugins);
 
   return function postcss(files, metalsmith, done) {
-    const styles = Object.keys(files).filter(minimatch.filter(options.pattern || '*.css', { matchBase: true }));
+    const styles = Object.keys(files).filter(minimatch.filter(options.pattern || '**/*.css'));
 
     if(styles.length == 0) {
       done();
@@ -88,4 +103,4 @@ function initPostcss(options) {
   };
 }
 
-module.exports = initP;
+module.exports = initPostcss;

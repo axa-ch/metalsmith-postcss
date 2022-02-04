@@ -48,5 +48,8 @@
   "peerDependencies": {
     "metalsmith": "^2.3.0",
     "postcss": "^5.0.4 || ^6.0.0 || ^7.0.0 || ^8.0.0"
+  },
+  "engines": {
+    "node": ">=8.17.0"
   }
 }
