@@ -1,6 +1,8 @@
 env:
   node: true
   es6:  true
+parserOptions:
+  ecmaVersion: 2020
 extends: 'eslint:recommended'
 rules:
   indent:
@@ -14,3 +16,7 @@ rules:
   semi:
     - error
     - always
+  no-use-before-define: error
+  no-array-constructor: error
+  prefer-const: error
+  no-var: error
