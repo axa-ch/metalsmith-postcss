@@ -1,1 +1,1 @@
-{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;CAClB","file":"styles.css","sourcesContent":["body {\n  color: peachpuff;\n}\n"]}
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA","file":"styles.css","sourcesContent":["body {\n  color: peachpuff;\n}\n\np {\n  box-shadow: 0 0 5px black;\n}\n"]}

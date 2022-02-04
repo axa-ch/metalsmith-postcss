@@ -57,6 +57,9 @@ describe('metalsmith-postcss', function () {
         .use(postcss({
           plugins: {
             'postcss-import': {}
+          },
+          map: {
+            inline: false
           }
         }))
         .build(function (err) {
@@ -71,8 +74,11 @@ describe('metalsmith-postcss', function () {
       metalsmith
         .use(postcss({
           plugins: [{
-            'postcss-import': {},
+            'postcss-import': { },
           }],
+          map: {
+            inline: false
+          }
         }))
         .build(function (err) {
           if (err) return done(err);

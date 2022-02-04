@@ -1,3 +1,7 @@
 body {
   color: peachpuff;
 }
+
+p {
+  box-shadow: 0 0 5px black;
+}

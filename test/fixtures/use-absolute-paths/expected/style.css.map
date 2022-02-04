@@ -1,0 +1,1 @@
+{"version":3,"sources":["foo.css","style.css"],"names":[],"mappings":"AAAA;EACE,eAAe;AACjB;;ACAA;EACE,gBAAgB;AAClB;;AAEA;EACE,yBAAyB;AAC3B","file":"style.css","sourcesContent":["h1 {\n  font-size: 1rem;\n}\n","@import \"foo.css\";\n\nbody {\n  color: peachpuff;\n}\n\np {\n  box-shadow: 0 0 5px black;\n}\n"]}

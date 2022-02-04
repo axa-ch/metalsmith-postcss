@@ -1,0 +1,1 @@
+{"version":3,"sources":["foo.css"],"names":[],"mappings":"AAAA;EACE,eAAe;AACjB","file":"foo.css","sourcesContent":["h1 {\n  font-size: 1rem;\n}\n"]}
