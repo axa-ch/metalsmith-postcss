@@ -7,15 +7,14 @@ function normalizeMapOptions(map) {
 
   return {
     inline: map === true ? true : map.inline,
-    prev: false, // Not implemented yet
-    sourcesContent: undefined,  // Not implemented yet
-    annotation: undefined // Not implemented yet
+    prev: true,
+    sourcesContent: true
   };
 }
 
 /**
  * @typedef {Object} SourceMapOptions 
- * @property {boolean} inline
+ * @property {boolean} [inline]
  */
 
 /**
@@ -67,6 +66,13 @@ function initPostcss(options) {
       const contents = files[file].contents.toString();
       const absolutePath = path.resolve(metalsmith.source(), file);
 
+      // if a previous source map has been generated for this file (eg through sass),
+      // pass its contents onto postcss
+      const prevMap = files[`${file}.map`];
+      if (map && prevMap) {
+        map.prev = prevMap.contents.toString();
+      }
+
       const promise = processor
         .process(contents, {
           from: absolutePath,
@@ -77,7 +83,7 @@ function initPostcss(options) {
           files[file].contents = Buffer.from(result.css);
 
           if (result.map) {
-            files[file + '.map'] = {
+            files[`${file}.map`] = {
               contents: Buffer.from(JSON.stringify(result.map)),
               mode: files[file].mode,
               stats: files[file].stats

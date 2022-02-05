@@ -28,11 +28,20 @@ Here is an example using `postcss-pseudoelements` and `postcss-nested` to transf
 ```js
 const postcss = require('metalsmith-postcss');
 
+// defaults with 2 plugins:
+metalsmith.use(postcss({ plugins: {
+  'postcss-pseudoelements': {}
+  'postcss-nested': {}
+}}))
+
+// explicit defaults with 2 plugins: 
 metalsmith.use(postcss({
+  pattern: '**/*.css',
   plugins: {
     'postcss-pseudoelements': {}
     'postcss-nested': {}
-  }
+  },
+  map: false
 }));
 ```
 
@@ -74,37 +83,16 @@ to specify PostCSS plugins using an array of objects(which can guarantee the ord
 
 ## Sourcemaps
 
-This plugin doesn't generate sourcemaps by default. However, you
-can enable them using several ways.
-
-### Inline sourcemaps
-
-Add `map: true` to the `options` argument to get your sourcemaps written into the source file.
+This plugin supports generating source maps. To do so, pass `map: true` for inline source maps (written into the CSS file), or `map: { inline: false }` for external source maps (written as `file.css.map`):
 
 ```js
 metalsmith.use(postcss({
   plugins: {},
-  map: true
+  map: true // same as { inline: false }
 }));
 ```
 
-Behind the scenes, this resolves to the following:
-
-```js
-metalsmith.use(postcss({
-  plugins: {},
-  map: {
-    inline: true
-  }
-}));
-```
-
-### External sourcemaps
-
-If you don't want to have your files polluted with sourcemaps,
-just set `inline: false`. Using that, you'll get `.map` files
-generated beside your sources.
-
+Example config for external source maps
 ```js
 metalsmith.use(postcss({
   plugins: {},
@@ -112,6 +100,19 @@ metalsmith.use(postcss({
     inline: false
   }
 }));
+```
+Source maps generation is compatible with [`@metalsmith/sass`](https://github.com/metalsmith/sass) and will find correct file paths from .scss source all the way through the last PostCSS transforms:
+
+```js
+metalsmith
+  .use(sass({
+    entries: {
+      'src/index.scss': 'index.css'
+    }
+  })
+  .use(postcss({
+    map: true,
+  }))
 ```
 
 ## CLI usage
