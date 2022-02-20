@@ -1,6 +1,11 @@
-const postcssLib = require('postcss');
-const minimatch = require('minimatch');
-const path = require('path');
+const postcssLib = require("postcss");
+const path = require("path");
+
+const defaultOptions = {
+  pattern: "**/*.css",
+  map: false,
+  plugins: [],
+};
 
 function normalizeMapOptions(map) {
   if (!map) return undefined;
@@ -8,12 +13,12 @@ function normalizeMapOptions(map) {
   return {
     inline: map === true ? true : map.inline,
     prev: undefined,
-    sourcesContent: true
+    sourcesContent: true,
   };
 }
 
 /**
- * @typedef {Object} SourceMapOptions 
+ * @typedef {Object} SourceMapOptions
  * @property {boolean} [inline]
  */
 
@@ -28,15 +33,16 @@ function normalizeMapOptions(map) {
  * @returns {import('metalsmith').Plugin}
  */
 function initPostcss(options) {
-
-  options = options || {};
-  const pluginsConfig = Array.isArray(options.plugins) ? options.plugins : [options.plugins];
+  options = Object.assign({}, defaultOptions, options || {});
+  const pluginsConfig = Array.isArray(options.plugins)
+    ? options.plugins
+    : [options.plugins];
   const plugins = [];
 
   // Require each plugin, pass its options
   // and add it to the plugins array.
   pluginsConfig.forEach(function (pluginsObject) {
-    if (typeof pluginsObject === 'string') {
+    if (typeof pluginsObject === "string") {
       plugins.push(require(pluginsObject)({}));
     } else {
       Object.keys(pluginsObject).forEach(function (pluginName) {
@@ -53,9 +59,9 @@ function initPostcss(options) {
   const processor = postcssLib(plugins);
 
   return function postcss(files, metalsmith, done) {
-    const styles = Object.keys(files).filter(minimatch.filter(options.pattern || '**/*.css'));
+    const styles = metalsmith.match(options.pattern);
 
-    if(styles.length == 0) {
+    if (styles.length == 0) {
       done();
       return;
     }
@@ -77,7 +83,7 @@ function initPostcss(options) {
         .process(contents, {
           from: absolutePath,
           to: absolutePath,
-          map: map
+          map: map,
         })
         .then(function (result) {
           files[file].contents = Buffer.from(result.css);
@@ -86,7 +92,7 @@ function initPostcss(options) {
             files[`${file}.map`] = {
               contents: Buffer.from(JSON.stringify(result.map)),
               mode: files[file].mode,
-              stats: files[file].stats
+              stats: files[file].stats,
             };
           }
         });
@@ -95,17 +101,18 @@ function initPostcss(options) {
     });
 
     Promise.all(promises)
-      .then(function() {
+      .then(function () {
         done();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // JSON.stringify on an actual error object yields 0 key/values
         if (error instanceof Error) {
           return done(error);
         }
-        done(new Error('Error during postcss processing: ' + JSON.stringify(error)));
+        done(
+          new Error("Error during postcss processing: " + JSON.stringify(error))
+        );
       });
-
   };
 }
 
