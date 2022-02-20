@@ -1,6 +1,6 @@
 const path = require("path");
 const assert = require("assert");
-const { describe, it } = require('mocha')
+const { describe, it } = require("mocha");
 const fixture = path.resolve.bind(path, __dirname, "fixtures");
 const equal = require("assert-dir-equal");
 const Metalsmith = require("metalsmith");
